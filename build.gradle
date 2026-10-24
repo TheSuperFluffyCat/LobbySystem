@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+}
+
+group = 'lobby.fluffylobby'
+version = '1.7.6'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
+}
+
+configurations {
+    shaded
+}
+
+def apiVersion = '1.21'
+
+dependencies {
+    // Compile once against the oldest supported API so this Java 21 jar can
+    // also run on newer servers through Minecraft 26.3.
+    compileOnly 'org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT'
+    // Adventure is used directly by the plugin but is not exposed as a
+    // compile dependency by every Spigot API distribution.
+    compileOnly 'net.kyori:adventure-api:4.17.0'
+    compileOnly 'net.kyori:adventure-text-minimessage:4.17.0'
+    compileOnly 'net.kyori:adventure-text-serializer-legacy:4.17.0'
+    shaded 'net.kyori:adventure-api:4.17.0'
+    shaded 'net.kyori:adventure-text-minimessage:4.17.0'
+    shaded 'net.kyori:adventure-text-serializer-legacy:4.17.0'
+    compileOnly 'me.clip:placeholderapi:2.11.6'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+processResources {
+    filesMatching('plugin.yml') {
+        expand(version: project.version, apiVersion: apiVersion)
+    }
+}
+
+jar {
+    archiveBaseName = 'FluffyLobby'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    // Spigot does not guarantee that MiniMessage is present. Include the
+    // parser/serializer libraries so the same jar also works on plain Spigot.
+    from(configurations.shaded.collect { zipTree(it) })
+}

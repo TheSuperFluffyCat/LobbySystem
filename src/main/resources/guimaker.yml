@@ -1,0 +1,89 @@
+###
+# Make your Own GUI for Server joining or other stuff
+###
+menus:
+  server_selector:
+    title: "<gradient:#FF4500:#FFD700>Server Selector</gradient>"
+    rows: 3
+    open_item:
+      material: PAPER
+      click_action: "RIGHT"
+    background_item:
+      material: GRAY_STAINED_GLASS_PANE
+    items:
+      - slot: 11
+        material: PAPER
+        name: "<green>Fraction SMP</green>"
+        lore:
+          - "<yellow>Join the ultimate <bold>Fraction SMP</bold>!"
+          - "<italic><blue>Explore endless possibilities</blue>"
+        action:
+          type: connect
+          server: "FractionSMP"
+      - slot: 15
+        material: PAPER
+        name: "<aqua>GHG</aqua>"
+        lore:
+          - "<gray>Join the thrilling <bold>GHG</bold> game mode!"
+          - "<italic><gold>Test your skills</gold>"
+        action:
+          type: connect
+          server: "GHG"
+      # Connect directly to a server IP or domain instead of a registered name.
+      # Format: "host:port" (port defaults to 25565 if omitted).
+      # - slot: 13
+      #   material: COMPASS
+      #   name: "<gold>Direct Connect</gold>"
+      #   action:
+      #     type: connect
+      #     address: "play.example.com:25565"
+      # Execute a command as the player who clicked the item.
+      # Set console: true only for trusted server-side commands.
+      # - slot: 22
+      #   material: COMPASS
+      #   name: "<green>Profile</green>"
+      #   action:
+      #     type: command
+      #     command: "profile %player%"
+      #     console: false
+
+
+
+#-> If you want to add more gui's just add them like the one below there is no limit
+
+  Diamond:
+    title: "<gradient:#00BFFF:#1E90FF>Diamond Showcase</gradient>"
+    rows: 3
+    open_item:
+      material: DIAMOND
+      click_action: "RIGHT"
+    background_item:
+      material: BLUE_STAINED_GLASS_PANE
+    items:
+      - slot: 11
+        material: DIAMOND
+        name: "<bold><gradient:#FFD700:#FF4500>Golden Diamond</gradient></bold>"
+        lore:
+          - "<italic><green>Shines brighter than the sun</green>"
+          - "<blue>A precious <bold>artifact</bold> for true adventurers</blue>"
+        action:
+          type: connect
+          server: "DiamondSMP"
+      - slot: 13
+        material: EMERALD
+        name: "<bold><gradient:#32CD32:#00FF7F>Emerald Enchantment</gradient></bold>"
+        lore:
+          - "<italic><yellow>This emerald holds great <bold>power</bold>"
+          - "<red>Only the chosen ones can wield it</red>"
+        action:
+          type: connect
+          server: "EmeraldMagic"
+      - slot: 15
+        material: NETHER_STAR
+        name: "<gradient:#8A2BE2:#4B0082>Nether Star</gradient>"
+        lore:
+          - "<italic><red>A mystical relic from the Nether</red>"
+          - "<blue>Unleash its secrets on your journey</blue>"
+        action:
+          type: connect
+          server: "NetherRealm"
